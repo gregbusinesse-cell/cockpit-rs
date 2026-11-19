@@ -1,0 +1,47 @@
+{
+  "businesses": [
+    {
+      "id": "zest",
+      "nom": "Zest",
+      "lettre": "Z",
+      "teinte": "lilas",
+      "config": {
+        "appStoreId": "6758613748",
+        "playPackage": "fr.zest.app",
+        "posthogHost": "https://us.posthog.com",
+        "pays": [
+          "fr",
+          "be",
+          "ch"
+        ],
+        "genre": 6013,
+        "objectifMensuelEUR": 5000,
+        "evenements": {
+          "installation": "onboarding_step_viewed",
+          "etape": "onboarding_answered",
+          "paywall": "paywall_shown",
+          "essai": "trial_start",
+          "achat": "purchase_completed",
+          "usage": "scan_completed"
+        },
+        "supabaseUrl": "https://riudbtyyqehibxomwhnn.supabase.co",
+        "ascIssuer": "49a9166e-d10a-4aca-a4a0-563c07196cad",
+        "ascVendor": "93981547",
+        "playBucket": "pubsite_prod_7596416315018037239",
+        "firebaseProject": "zest-app-d99cc"
+      }
+    }
+  ],
+  "comptes": [
+    {
+      "business": "zest",
+      "plateforme": "tiktok",
+      "handle": "brothers.diet"
+    },
+    {
+      "business": "zest",
+      "plateforme": "instagram",
+      "handle": "brothers.diet"
+    }
+  ]
+}

@@ -5,6 +5,7 @@
 mod commandes;
 mod ecrans;
 mod hote;
+mod maj;
 mod tray;
 
 use noyau::collecte::collecteur::Collecteur;
@@ -25,6 +26,7 @@ pub struct Etat {
 const EVENEMENT: &str = "cockpit";
 
 fn main() {
+    maj::graine_par_defaut();
     let store = match Store::ouvrir() {
         Ok(s) => Arc::new(s),
         Err(e) => {
@@ -38,6 +40,7 @@ fn main() {
         .menu(menu)
         .plugin(tauri_plugin_notification::init())
         .plugin(tauri_plugin_opener::init())
+        .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(
             tauri::plugin::Builder::<tauri::Wry, ()>::new("veille")
                 .invoke_handler(tauri::generate_handler![commandes::message])
@@ -54,6 +57,7 @@ fn main() {
             app.manage(ecrans::barre::EtatBarre::default());
             app.asset_protocol_scope().allow_directory(noyau::chemins::cache(), true)?;
             tray::creer(app.handle())?;
+            maj::surveiller(app.handle().clone());
             let poignee = app.handle().clone();
             tauri::async_runtime::spawn(async move {
                 collecteur.demarrer();

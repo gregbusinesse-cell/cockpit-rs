@@ -110,8 +110,11 @@ pub async fn pause(etat: State<'_, Etat>, oui: bool) -> Rep<()> {
 
 /// Relance une source, ou toutes.
 #[tauri::command]
-pub async fn relancer(etat: State<'_, Etat>, source: Option<String>) -> Rep<()> {
+pub async fn relancer(app: AppHandle, etat: State<'_, Etat>, source: Option<String>) -> Rep<()> {
     etat.collecteur.relancer(source.as_deref());
+    if source.is_none() {
+        crate::maj::verifier(app);
+    }
     Ok(())
 }
 
